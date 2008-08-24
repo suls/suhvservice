@@ -1,0 +1,7 @@
+# require 'autotest/rspec'
+require 'autotest/redgreen'
+require 'autotest/growl'
+
+Autotest.add_hook :run do  |at|
+  at.add_exception /gen/
+end

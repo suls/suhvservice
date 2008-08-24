@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:league" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:league" xmlns:intf="urn:league" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+ <wsdl:types>
+  <schema targetNamespace="urn:league" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="LeagueRequest">
+    <sequence>
+     <element name="DevId" type="xsd:int"/>
+     <element name="DevCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TableRequest">
+    <complexContent>
+     <extension base="impl:LeagueRequest">
+      <sequence>
+       <element name="Mode" type="xsd:short"/>
+       <element name="Language" type="xsd:short"/>
+       <element name="Season" type="xsd:short"/>
+       <element name="Club" nillable="true" type="xsd:string"/>
+       <element name="LeagueCode" type="xsd:short"/>
+       <element name="Group" type="xsd:short"/>
+       <element name="LatestGroupOnly" type="xsd:boolean"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="LeagueResponse">
+    <sequence>
+     <element name="Copyright" nillable="true" type="xsd:string"/>
+     <element name="Disclaimer" nillable="true" type="xsd:string"/>
+     <element name="Date" nillable="true" type="xsd:string"/>
+     <element name="ServiceVersion" nillable="true" type="xsd:string"/>
+     <element name="ServiceImplementation" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TableEntry">
+    <sequence>
+     <element name="Rank" type="xsd:int"/>
+     <element name="Team" nillable="true" type="xsd:string"/>
+     <element name="LeagueCode" type="xsd:short"/>
+     <element name="League" nillable="true" type="xsd:string"/>
+     <element name="Group" type="xsd:short"/>
+     <element name="GamesPlayed" type="xsd:int"/>
+     <element name="Wins" type="xsd:int"/>
+     <element name="WinsAfterOvertime" type="xsd:int"/>
+     <element name="Draws" type="xsd:int"/>
+     <element name="Defeats" type="xsd:int"/>
+     <element name="DefeatsAfterOvertime" type="xsd:int"/>
+     <element name="GoalsScored" type="xsd:int"/>
+     <element name="GoalsReceived" type="xsd:int"/>
+     <element name="Points" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfTableEntry">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:TableEntry[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="TableResponse">
+    <complexContent>
+     <extension base="impl:LeagueResponse">
+      <sequence>
+       <element name="Table" nillable="true" type="impl:ArrayOfTableEntry"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ResultsRequest">
+    <complexContent>
+     <extension base="impl:LeagueRequest">
+      <sequence>
+       <element name="Mode" type="xsd:short"/>
+       <element name="Season" type="xsd:short"/>
+       <element name="Language" type="xsd:short"/>
+       <element name="LeagueCode" type="xsd:short"/>
+       <element name="Group" type="xsd:short"/>
+       <element name="Club" nillable="true" type="xsd:string"/>
+       <element name="Rounds" type="xsd:short"/>
+       <element name="LatestGroupOnly" type="xsd:boolean"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Result">
+    <sequence>
+     <element name="Round" type="xsd:short"/>
+     <element name="LeagueCode" type="xsd:short"/>
+     <element name="League" nillable="true" type="xsd:string"/>
+     <element name="Group" type="xsd:short"/>
+     <element name="HomeTeam" nillable="true" type="xsd:string"/>
+     <element name="AwayTeam" nillable="true" type="xsd:string"/>
+     <element name="GoalsHomeTeam" type="xsd:short"/>
+     <element name="GoalsAwayTeam" type="xsd:short"/>
+     <element name="GoalsHomeTeamPeriod1" type="xsd:short"/>
+     <element name="GoalsHomeTeamPeriod2" type="xsd:short"/>
+     <element name="GoalsHomeTeamPeriod3" type="xsd:short"/>
+     <element name="GoalsHomeTeamOvertime" type="xsd:short"/>
+     <element name="GoalsHomeTeamPenalty" type="xsd:short"/>
+     <element name="GoalsAwayTeamPeriod1" type="xsd:short"/>
+     <element name="GoalsAwayTeamPeriod2" type="xsd:short"/>
+     <element name="GoalsAwayTeamPeriod3" type="xsd:short"/>
+     <element name="GoalsAwayTeamOvertime" type="xsd:short"/>
+     <element name="GoalsAwayTeamPenalty" type="xsd:short"/>
+     <element name="Played" type="xsd:boolean"/>
+     <element name="Overtime" type="xsd:boolean"/>
+     <element name="Forfait" type="xsd:boolean"/>
+     <element name="Date" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfResult">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:Result[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ResultsResponse">
+    <complexContent>
+     <extension base="impl:LeagueResponse">
+      <sequence>
+       <element name="Results" nillable="true" type="impl:ArrayOfResult"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="GamesRequest">
+    <complexContent>
+     <extension base="impl:LeagueRequest">
+      <sequence>
+       <element name="Mode" type="xsd:short"/>
+       <element name="Season" type="xsd:short"/>
+       <element name="Language" type="xsd:short"/>
+       <element name="LeagueCode" type="xsd:short"/>
+       <element name="Group" type="xsd:short"/>
+       <element name="Club" nillable="true" type="xsd:string"/>
+       <element name="Rounds" type="xsd:short"/>
+       <element name="LatestGroupOnly" type="xsd:boolean"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Game">
+    <sequence>
+     <element name="Round" type="xsd:short"/>
+     <element name="LeagueCode" type="xsd:short"/>
+     <element name="League" nillable="true" type="xsd:string"/>
+     <element name="Group" type="xsd:short"/>
+     <element name="HomeTeam" nillable="true" type="xsd:string"/>
+     <element name="AwayTeam" nillable="true" type="xsd:string"/>
+     <element name="GymName" nillable="true" type="xsd:string"/>
+     <element name="Place" nillable="true" type="xsd:string"/>
+     <element name="Date" nillable="true" type="xsd:string"/>
+     <element name="Time" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfGame">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:Game[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="GamesResponse">
+    <complexContent>
+     <extension base="impl:LeagueResponse">
+      <sequence>
+       <element name="Games" nillable="true" type="impl:ArrayOfGame"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ScorerRequest">
+    <complexContent>
+     <extension base="impl:LeagueRequest">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ScorerResponse">
+    <complexContent>
+     <extension base="impl:LeagueResponse">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="gamesLeagueRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Group" type="xsd:short"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesTeamResponse">
+
+      <wsdl:part name="response" type="impl:GamesResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsRequest">
+
+      <wsdl:part name="request" type="impl:ResultsRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="echoResponse">
+
+      <wsdl:part name="response" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableLeagueResponse">
+
+      <wsdl:part name="response" type="impl:TableResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsTeamGroupRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Group" type="xsd:short"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableTeamResponse">
+
+      <wsdl:part name="response" type="impl:TableResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesTeamRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+      <wsdl:part name="LatestGroupOnly" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testSimpleResponse">
+
+      <wsdl:part name="response" type="impl:LeagueResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableClubRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LatestGroupOnly" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsLeagueResponse">
+
+      <wsdl:part name="response" type="impl:ResultsResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsTeamResponse">
+
+      <wsdl:part name="response" type="impl:ResultsResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsResponse">
+
+      <wsdl:part name="response" type="impl:ResultsResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableTeamRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="LatestGroupOnly" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsTeamGroupResponse">
+
+      <wsdl:part name="response" type="impl:ResultsResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesClubResponse">
+
+      <wsdl:part name="response" type="impl:GamesResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesResponse">
+
+      <wsdl:part name="response" type="impl:GamesResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableClubResponse">
+
+      <wsdl:part name="response" type="impl:TableResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableLeagueRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Group" type="xsd:short"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesTeamGroupRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Group" type="xsd:short"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableRequest">
+
+      <wsdl:part name="request" type="impl:TableRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesRequest">
+
+      <wsdl:part name="request" type="impl:GamesRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testRequest">
+
+      <wsdl:part name="request" type="impl:LeagueRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableTeamGroupRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Group" type="xsd:short"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesLeagueResponse">
+
+      <wsdl:part name="response" type="impl:GamesResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsClubRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+      <wsdl:part name="LatestGroupOnly" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="echoRequest">
+
+      <wsdl:part name="request" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResponse">
+
+      <wsdl:part name="response" type="impl:LeagueResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsTeamRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+      <wsdl:part name="LatestGroupOnly" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableResponse">
+
+      <wsdl:part name="response" type="impl:TableResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesTeamGroupResponse">
+
+      <wsdl:part name="response" type="impl:GamesResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="tableTeamGroupResponse">
+
+      <wsdl:part name="response" type="impl:TableResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testSimpleRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gamesClubRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="Club" type="xsd:string"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+      <wsdl:part name="LatestGroupOnly" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsLeagueRequest">
+
+      <wsdl:part name="DevId" type="xsd:int"/>
+
+      <wsdl:part name="DevCode" type="xsd:string"/>
+
+      <wsdl:part name="Language" type="xsd:short"/>
+
+      <wsdl:part name="Season" type="xsd:short"/>
+
+      <wsdl:part name="LeagueCode" type="xsd:short"/>
+
+      <wsdl:part name="Group" type="xsd:short"/>
+
+      <wsdl:part name="Rounds" type="xsd:short"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="resultsClubResponse">
+
+      <wsdl:part name="response" type="impl:ResultsResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="League">
+
+      <wsdl:operation name="table" parameterOrder="request">
+
+         <wsdl:input message="impl:tableRequest" name="tableRequest"/>
+
+         <wsdl:output message="impl:tableResponse" name="tableResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableLeague" parameterOrder="DevId DevCode Language Season LeagueCode Group">
+
+         <wsdl:input message="impl:tableLeagueRequest" name="tableLeagueRequest"/>
+
+         <wsdl:output message="impl:tableLeagueResponse" name="tableLeagueResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableTeam" parameterOrder="DevId DevCode Language Season Club LeagueCode LatestGroupOnly">
+
+         <wsdl:input message="impl:tableTeamRequest" name="tableTeamRequest"/>
+
+         <wsdl:output message="impl:tableTeamResponse" name="tableTeamResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableTeamGroup" parameterOrder="DevId DevCode Language Season Club LeagueCode Group">
+
+         <wsdl:input message="impl:tableTeamGroupRequest" name="tableTeamGroupRequest"/>
+
+         <wsdl:output message="impl:tableTeamGroupResponse" name="tableTeamGroupResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableClub" parameterOrder="DevId DevCode Language Season Club LatestGroupOnly">
+
+         <wsdl:input message="impl:tableClubRequest" name="tableClubRequest"/>
+
+         <wsdl:output message="impl:tableClubResponse" name="tableClubResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="results" parameterOrder="request">
+
+         <wsdl:input message="impl:resultsRequest" name="resultsRequest"/>
+
+         <wsdl:output message="impl:resultsResponse" name="resultsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsLeague" parameterOrder="DevId DevCode Language Season LeagueCode Group Rounds">
+
+         <wsdl:input message="impl:resultsLeagueRequest" name="resultsLeagueRequest"/>
+
+         <wsdl:output message="impl:resultsLeagueResponse" name="resultsLeagueResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsTeam" parameterOrder="DevId DevCode Language Season Club LeagueCode Rounds LatestGroupOnly">
+
+         <wsdl:input message="impl:resultsTeamRequest" name="resultsTeamRequest"/>
+
+         <wsdl:output message="impl:resultsTeamResponse" name="resultsTeamResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsTeamGroup" parameterOrder="DevId DevCode Language Season Club LeagueCode Group Rounds">
+
+         <wsdl:input message="impl:resultsTeamGroupRequest" name="resultsTeamGroupRequest"/>
+
+         <wsdl:output message="impl:resultsTeamGroupResponse" name="resultsTeamGroupResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsClub" parameterOrder="DevId DevCode Language Season Club Rounds LatestGroupOnly">
+
+         <wsdl:input message="impl:resultsClubRequest" name="resultsClubRequest"/>
+
+         <wsdl:output message="impl:resultsClubResponse" name="resultsClubResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="games" parameterOrder="request">
+
+         <wsdl:input message="impl:gamesRequest" name="gamesRequest"/>
+
+         <wsdl:output message="impl:gamesResponse" name="gamesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesLeague" parameterOrder="DevId DevCode Language Season LeagueCode Group Rounds">
+
+         <wsdl:input message="impl:gamesLeagueRequest" name="gamesLeagueRequest"/>
+
+         <wsdl:output message="impl:gamesLeagueResponse" name="gamesLeagueResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesTeam" parameterOrder="DevId DevCode Language Season Club LeagueCode Rounds LatestGroupOnly">
+
+         <wsdl:input message="impl:gamesTeamRequest" name="gamesTeamRequest"/>
+
+         <wsdl:output message="impl:gamesTeamResponse" name="gamesTeamResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesTeamGroup" parameterOrder="DevId DevCode Language Season Club LeagueCode Group Rounds">
+
+         <wsdl:input message="impl:gamesTeamGroupRequest" name="gamesTeamGroupRequest"/>
+
+         <wsdl:output message="impl:gamesTeamGroupResponse" name="gamesTeamGroupResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesClub" parameterOrder="DevId DevCode Language Season Club Rounds LatestGroupOnly">
+
+         <wsdl:input message="impl:gamesClubRequest" name="gamesClubRequest"/>
+
+         <wsdl:output message="impl:gamesClubResponse" name="gamesClubResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="test" parameterOrder="request">
+
+         <wsdl:input message="impl:testRequest" name="testRequest"/>
+
+         <wsdl:output message="impl:testResponse" name="testResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testSimple" parameterOrder="DevId DevCode">
+
+         <wsdl:input message="impl:testSimpleRequest" name="testSimpleRequest"/>
+
+         <wsdl:output message="impl:testSimpleResponse" name="testSimpleResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="echo" parameterOrder="request">
+
+         <wsdl:input message="impl:echoRequest" name="echoRequest"/>
+
+         <wsdl:output message="impl:echoResponse" name="echoResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="leagueSoapBinding" type="impl:League">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="table">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tableRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tableResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableLeague">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tableLeagueRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tableLeagueResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableTeam">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tableTeamRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tableTeamResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableTeamGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tableTeamGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tableTeamGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="tableClub">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="tableClubRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="tableClubResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="results">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="resultsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="resultsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsLeague">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="resultsLeagueRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="resultsLeagueResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsTeam">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="resultsTeamRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="resultsTeamResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsTeamGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="resultsTeamGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="resultsTeamGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="resultsClub">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="resultsClubRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="resultsClubResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="games">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gamesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gamesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesLeague">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gamesLeagueRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gamesLeagueResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesTeam">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gamesTeamRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gamesTeamResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesTeamGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gamesTeamGroupRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gamesTeamGroupResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gamesClub">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gamesClubRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gamesClubResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="test">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testSimple">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testSimpleRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testSimpleResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="echo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="echoRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="echoResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:league" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="LeagueService">
+
+      <wsdl:port binding="impl:leagueSoapBinding" name="league">
+
+         <wsdlsoap:address location="http://www.swissunihockey.ch/weblounge/webservices/league"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
