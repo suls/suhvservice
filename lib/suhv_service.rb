@@ -1,7 +1,9 @@
 require "rubygems"
 gem 'soap4r'
 
-require File.dirname(__FILE__) + "/../gen/suhv_service"
+$:.unshift File.join(File.dirname(__FILE__), "..", "gen")
+
+require "suhv_service_stubDriver"
 
 class SUHVService
   
