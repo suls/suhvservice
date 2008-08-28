@@ -7,14 +7,14 @@ namespace :suhv do
   desc "Generate SOAP stubs for SUHV service" 
   # task :generate => [:environment] do 
   task :generate do 
-    wsdl2ruby('suhv_service', 'SUHV', File.dirname(__FILE__) + "/../lib/SwissUnihockey.wsdl") 
+    wsdl2ruby('suhv_service_stub', 'SUHV', File.dirname(__FILE__) + "/../lib/SwissUnihockey.wsdl") 
   end
   
   desc "Generate SOAP stubs for SUHV service" 
   # task :generate => [:environment] do 
   task :generate_web do 
     begin
-      wsdl2ruby('suhv_service', 'SUHV', 'http://www.swissunihockey.ch/weblounge/webservices/league?wsdl') 
+      wsdl2ruby('suhv_service_stub', 'SUHV', 'http://www.swissunihockey.ch/weblounge/webservices/league?wsdl') 
     rescue SocketError => err
       puts "couldn't contact swissunihockey.ch server"
     end
