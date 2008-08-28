@@ -1038,7 +1038,7 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
       <wsdl:port binding="impl:leagueSoapBinding" name="league">
 
-         <wsdlsoap:address location="http://www.swissunihockey.ch/weblounge/webservices/league"/>
+         <wsdlsoap:address location="http://ws.swissunihockey.ch/weblounge/webservices/league"/>
 
       </wsdl:port>
 
