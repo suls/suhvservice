@@ -5,11 +5,10 @@ require "suhv_service"
 describe "SUHV service plugin" do
   
   before(:each) do
-    # setup_rake_task_and_initialsie_plugin
+    
   end
   
   it "should be able to query the echo function" do
-    # require 'suhv_service'
     
     suhv = SUHV::League.new
     output = input = "test " * 3
@@ -17,7 +16,7 @@ describe "SUHV service plugin" do
   end
 
   after(:each) do
-    # cleanup_rake_task
+    
   end
   
   # describe "generated stubs" do
