@@ -17,7 +17,7 @@ task :default => :spec
 #   t.verbose = true
 # end
 
-CLOBBER.include('gen/suhv_*.rb')
+CLOBBER.include('gen/*.rb')
 
 desc "Run all specs"
 Spec::Rake::SpecTask.new do |t|
