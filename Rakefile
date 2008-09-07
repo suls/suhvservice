@@ -8,9 +8,9 @@ require 'rake/clean'
 Rake.application.rake_require 'tasks/suhv_service_tasks'
 
 desc 'Default: run specs.'
-task :default => :spec
+task :default => "suhv:generate"
 
-CLOBBER.include('gen/*.rb')
+CLOBBER.include(File.dirname(__FILE__)+'/gen/*.rb')
 
 desc "Run all specs."
 Spec::Rake::SpecTask.new do |t|

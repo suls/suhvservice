@@ -1,6 +1,7 @@
 require "rubygems"
 gem "soap4r"
 require 'wsdl/soap/wsdl2ruby' 
+require "ftools"
 
 namespace :suhv do 
 
@@ -27,6 +28,8 @@ def wsdl2ruby(name, module_name, url, dir=File.dirname(__FILE__) + "/../gen")
   g = WSDL::SOAP::WSDL2Ruby.new 
   g.location = url 
   g.basedir = ENV["SUHV_GEN_DIR"] || dir
+  
+  FileUtils.mkdir g.basedir unless File.exists? g.basedir
   
   if ENV["SUHV_LOGGER"]
     g.logger = Logger.new(ENV["SUHV_LOGGER"])
