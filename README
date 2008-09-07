@@ -1,13 +1,18 @@
 SuhvService
 ===========
 
-Introduction goes here.
+Rails-Plugin for accessing the SUHV web service.
 
 
 Example
 =======
 
-Example goes here.
+See example/ directory. Before running the examples you need to
+generate the file ~/.suhv_id as follows:
 
+    suhv_id = { :dev_id => , :dev_code => ""}
+    File.open(ENV["HOME"]+"/.suhv_id", "w") { |file| YAML.dump(suhv_id, file) }
+
+That's it!
 
 Copyright (c) 2008 Mathias Sulser, released under the MIT license
